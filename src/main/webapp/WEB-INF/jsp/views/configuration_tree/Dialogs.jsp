@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <input type="hidden" id="currentConfigurationTreeId" value=""/>
 <div data-dojo-type="dijit/Dialog" id="editLineDialog" title="Edit " style="width: 700px; display: none">

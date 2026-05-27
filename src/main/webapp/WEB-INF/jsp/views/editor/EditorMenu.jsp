@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <div id="editorPane" class="centerPanel" data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'top', title:'Modify'">
 

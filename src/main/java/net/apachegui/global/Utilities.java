@@ -6,7 +6,7 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import apache.conf.global.Utils;
 import net.apachegui.db.SettingsDao;

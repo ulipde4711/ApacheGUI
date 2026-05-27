@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import net.apachegui.global.Constants;
 import net.apachegui.global.Utilities;

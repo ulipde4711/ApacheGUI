@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <script src="../resources/codemirror/lib/codemirror.js?version=${version}"></script>
 <link rel="stylesheet" href="../resources/codemirror/lib/codemirror.css?version=${version}">

@@ -7,7 +7,7 @@ import apache.conf.parser.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVWriter;
 import net.apachegui.db.LogData;
 import net.apachegui.db.LogDataDao;
 import net.apachegui.db.Timestamp;

@@ -16,6 +16,8 @@ import net.apachegui.server.ServerInfo;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/web/Init")
 public class InitController {
     private static Logger log = Logger.getLogger(InitController.class);
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/CheckFirstTime", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public String checkInit() {
@@ -239,7 +244,7 @@ public class InitController {
         UsersDao.getInstance().setUsername(username);
 
         log.trace("Setting name:" + Constants.PASSWORD + " value: XXXXX");
-        UsersDao.getInstance().setPassword(password);
+        UsersDao.getInstance().setPassword(passwordEncoder.encode(password));
 
         log.trace("Setting name:" + Constants.ENABLE_AUTHENTICATION + " value: " + enableAuthentication);
         SettingsDao.getInstance().setSetting(Constants.ENABLE_AUTHENTICATION, enableAuthentication);
@@ -311,7 +316,7 @@ public class InitController {
         UsersDao.getInstance().setUsername(username);
 
         log.trace("Setting name:" + Constants.PASSWORD + " value: XXXXX");
-        UsersDao.getInstance().setPassword(password);
+        UsersDao.getInstance().setPassword(passwordEncoder.encode(password));
 
         log.trace("Setting name:" + Constants.CONF_DIRECTORY + " value: " + confDirectory);
         SettingsDao.getInstance().setSetting(Constants.CONF_DIRECTORY, confDirectory);

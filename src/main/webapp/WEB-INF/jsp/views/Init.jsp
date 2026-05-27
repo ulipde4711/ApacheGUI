@@ -1,6 +1,6 @@
 <%@ page import="net.apachegui.global.Constants" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
 <div dojoType="net.apachegui.NoCloseDialog" id="initDialogInstallationType" title="How was Apache installed?" style="display: none">
     <form dojoType="dijit.form.Form" id="initFormInstallationType">
