@@ -11,6 +11,7 @@
   
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.release>17</maven.compiler.release>
       <environment>IX</environment>
       <apachegui.home>${basedir}/environments/${environment}/ApacheGUI</apachegui.home>
       <package.dir>/opt/release</package.dir>
@@ -60,14 +61,10 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
+        <version>3.13.0</version>
       </plugin>
-    </plugins>  
- </build>      
+    </plugins>
+ </build>
   
   <profiles>
       <profile>
@@ -77,11 +74,7 @@
             <plugins>
               <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
-                </configuration>
+                <version>3.13.0</version>
               </plugin>
               <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -93,11 +86,11 @@
                       <goal>run</goal>
                     </goals>
                     <configuration>
-                      <tasks>
+                      <target>
                         <property name="webapp.dir" value="${project.build.directory}/packagejs"/>
                         <property name="resources.dir" value="${basedir}/src/main/webapp/resources"/>
                         <ant antfile="build.xml" target="package.js" />
-                      </tasks>
+                      </target>
                     </configuration>
                   </execution>
                   <execution>
@@ -107,18 +100,18 @@
                       <goal>run</goal>
                     </goals>
                     <configuration>
-                      <tasks>
+                      <target>
                         <property name="apachegui.home" value="${apachegui.home}"/>
                         <property name="project.build.directory" value="${project.build.directory}"/>
                         <ant antfile="build.xml" target="install" />
-                      </tasks>
+                      </target>
                     </configuration>
                   </execution>
                 </executions>
               </plugin>
               <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.4.0</version>
                 <configuration>
                   <failOnMissingWebXml>true</failOnMissingWebXml>
                   <warSourceExcludes>resources/**,manual/node_modules/**,manual/auto_suggest_24.js,manual/auto_suggest_22.js,manual/scraper.js</warSourceExcludes>
@@ -154,15 +147,11 @@
             <plugins>
               <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
-                </configuration>
+                <version>3.13.0</version>
               </plugin>
               <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.4.0</version>
                 <configuration>
                   <failOnMissingWebXml>true</failOnMissingWebXml>
                   <warSourceExcludes>manual/node_modules/**,manual/auto_suggest_24.js,manual/auto_suggest_22.js,manual/scraper.js</warSourceExcludes>
@@ -178,11 +167,11 @@
                       <goal>run</goal>
                     </goals>
                     <configuration>
-                      <tasks>
+                      <target>
                         <property name="apachegui.home" value="${apachegui.home}"/>
                         <property name="project.build.directory" value="${project.build.directory}"/>
                         <ant antfile="build.xml" target="install" />
-                      </tasks>
+                      </target>
                     </configuration>
                   </execution>
                 </executions>
@@ -203,14 +192,14 @@
                                 <goal>run</goal>
                             </goals>
                             <configuration>
-                              <tasks>
+                              <target>
                                 <property name="apachegui.home" value="${apachegui.home}"/>
                                 <property name="package.dir" value="${package.dir}"/>
                                   <property name="environment" value="${environment}"/>
                                 <property name="version" value="${project.version}" />
                                 <property name="dbdir" value="${basedir}/build/db/apacheGUI" />
                                 <ant antfile="build.xml" target="buildpackage" />
-                              </tasks>
+                              </target>
                             </configuration>
                         </execution>
                     </executions>
@@ -282,11 +271,6 @@
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-aop</artifactId>
-          <version>4.0.6.RELEASE</version>
-      </dependency>
-      <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-aspects</artifactId>
           <version>4.0.6.RELEASE</version>
       </dependency>
       <dependency>
