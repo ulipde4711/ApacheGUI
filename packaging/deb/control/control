@@ -1,0 +1,12 @@
+Package: apachegui
+Version: [[version]]
+Section: admin
+Priority: optional
+Architecture: all
+Depends: openjdk-17-jre-headless | openjdk-21-jre-headless | default-jre-headless, apache2
+Maintainer: Ulrich Papendick <ulipde@googlemail.com>
+Homepage: https://github.com/ulipde4711/ApacheGUI
+Description: Web UI for managing the Apache HTTP Server
+ ApacheGUI is a Java/Spring Boot web application for configuring and
+ controlling a local Apache HTTP Server through the browser. It runs as a
+ systemd service and listens on port 8080.

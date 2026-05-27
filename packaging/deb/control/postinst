@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+case "$1" in
+  configure)
+    mkdir -p /opt/apachegui/db
+    # Seed the SQLite databases only on a fresh install — never overwrite
+    # an existing DB (preserves configuration/users across upgrades).
+    for f in apachegui-gui-database.db apachegui-history-database.db; do
+      if [ ! -f "/opt/apachegui/db/$f" ] && [ -f "/usr/share/apachegui/db-default/$f" ]; then
+        cp "/usr/share/apachegui/db-default/$f" "/opt/apachegui/db/$f"
+      fi
+    done
+    if [ -d /run/systemd/system ]; then
+      systemctl daemon-reload || true
+      systemctl enable apachegui.service || true
+      systemctl restart apachegui.service || true
+    fi
+    ;;
+esac
+exit 0

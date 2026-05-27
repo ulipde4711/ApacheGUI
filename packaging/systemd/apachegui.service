@@ -1,0 +1,20 @@
+[Unit]
+Description=ApacheGUI - web UI for managing the Apache HTTP Server
+Documentation=https://github.com/ulipde4711/ApacheGUI
+After=network.target
+
+[Service]
+Type=simple
+# ApacheGUI manages the local Apache (edits its config, runs apache2ctl),
+# which needs privileges, so it runs as root. To harden, switch to a
+# dedicated user plus sudoers rules for apache2ctl and write access to
+# /etc/apache2.
+User=root
+WorkingDirectory=/opt/apachegui
+ExecStart=/usr/bin/java -jar /opt/apachegui/ApacheGUI.war --server.port=8080 --server.tomcat.basedir=/opt/apachegui
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

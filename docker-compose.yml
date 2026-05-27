@@ -1,0 +1,15 @@
+# Dev/test environment: ApacheGUI managing an Apache httpd inside one container.
+#
+#   docker compose up --build
+#   open http://localhost:8080   (login: admin / admin)
+#
+# The managed Apache (container port 80) is exposed on host port 8888 so you
+# can hit it once you start it from the ApacheGUI UI.
+services:
+  apachegui:
+    build: .
+    image: apachegui:dev
+    container_name: apachegui-dev
+    ports:
+      - "8080:8080"   # ApacheGUI web UI
+      - "8888:80"     # the Apache httpd that ApacheGUI manages

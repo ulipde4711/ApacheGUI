@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+case "$1" in
+  purge)
+    rm -rf /opt/apachegui
+    if [ -d /run/systemd/system ]; then
+      systemctl daemon-reload || true
+    fi
+    ;;
+esac
+exit 0
