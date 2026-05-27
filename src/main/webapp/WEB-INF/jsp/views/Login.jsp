@@ -47,7 +47,7 @@
             <jsp:include page="/jsp/Heading.jsp"     flush="true" />
 
             <div data-dojo-type="dijit.layout.ContentPane" data-dojo-props="region: 'center'">
-                <form dojoType="dijit.form.Form" id="loginForm" action="j_security_check" method="post">
+                <form dojoType="dijit.form.Form" id="loginForm" action="<c:url value='/j_security_check'/>" method="post">
                     <table width="300" align="center">
                         <tr class="dijitDialogPaneContentArea">
                             <td>
