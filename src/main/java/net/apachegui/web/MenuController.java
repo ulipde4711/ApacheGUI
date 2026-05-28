@@ -43,15 +43,20 @@ public class MenuController {
             String confDirectory = SettingsDao.getInstance().getSetting(Constants.CONF_DIRECTORY);
             String logDirectory = SettingsDao.getInstance().getSetting(Constants.LOG_DIRECTORY);
 
+            // Only the folder nodes (Configuration/Documents/Logs) carry a $ref:
+            // dojox JsonRest lazy-loads $ref ids via GET /web/Menu/rest/<id>. The
+            // leaf nodes below have no such endpoint (it returns an empty body),
+            // which makes JsonRest deref null and abort the whole tree load, so
+            // they are emitted as plain inline items without a $ref.
             out.print("[" + "{ $ref: '" + Constants.CONFIGURATION_ROOT + confDirectory + "', name:'Configuration', id:'" + Constants.CONFIGURATION_ROOT + confDirectory + "', children:true}," + "{ $ref: '"
                     + Constants.DOCUMENTS_ROOT + (Utils.isWindows() ? Utilities.getFileSystemDrive() : "/") + "', name:'Documents', id:'" + Constants.DOCUMENTS_ROOT
                     + (Utils.isWindows() ? Utilities.getFileSystemDrive() : "/") + "', children:true}," + "{ $ref: '" + Constants.LOGS_ROOT + logDirectory + "', name:'Logs', id:'" + Constants.LOGS_ROOT
-                    + logDirectory + "', children:true}," + "{ $ref: 'Control', name:'Control', id:'Control', type:'Control'},"
-                    + "{ $ref: 'Global_Settings', name:'Global Settings', id:'Global_Settings', type:'Global_Settings'},"
-                    + "{ $ref: 'Virtual_Hosts', name:'Virtual Hosts', id:'Virtual_Hosts', type:'Virtual_Hosts'},"
-                    + "{ $ref: 'Global_Tree', name:'Global Tree', id:'Global_Tree', type:'Global_Tree'},"
-                    + "{ $ref: 'History', name:'History', id:'History', type:'History'},"
-                    + "{ $ref: 'GUISettings', name:'GUISettings', id:'GUISettings', type:'GUISettings'}" + "]");
+                    + logDirectory + "', children:true}," + "{ name:'Control', id:'Control', type:'Control'},"
+                    + "{ name:'Global Settings', id:'Global_Settings', type:'Global_Settings'},"
+                    + "{ name:'Virtual Hosts', id:'Virtual_Hosts', type:'Virtual_Hosts'},"
+                    + "{ name:'Global Tree', id:'Global_Tree', type:'Global_Tree'},"
+                    + "{ name:'History', id:'History', type:'History'},"
+                    + "{ name:'GUISettings', id:'GUISettings', type:'GUISettings'}" + "]");
         }
     }
 
