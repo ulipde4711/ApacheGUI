@@ -47,7 +47,7 @@ define([ "dojo/_base/declare",
                 this.initialized = true;
             } else {
                 net.apachegui.Main.getInstance().getApacheVersion(function(version) {
-                    var url = '/ApacheGUI/manual/auto_suggest_' + version.replace('.', '') + '.min.js';
+                    var url = '/manual/auto_suggest_' + version.replace('.', '') + '.min.js';
                     script.get(url).then(function() {
                         that.initialized = true;
                     });
