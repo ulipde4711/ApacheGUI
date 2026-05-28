@@ -35,6 +35,13 @@
                  logs.setCurrOption('${option}');
                  logs.updateSelection();
 
+                 // Show the file content immediately on open (run the search with
+                 // the current, empty filter). Only in search mode; tail follows
+                 // newly-appended lines and download is a one-shot.
+                 <c:if test="${empty option || option == 'search'}">
+                 logs.search();
+                 </c:if>
+
                  dom.byId("logsBody").style.visibility='visible';
              });
          });
