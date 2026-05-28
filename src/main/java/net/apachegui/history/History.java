@@ -37,8 +37,6 @@ public class History {
 
     private static String[] getIncludeStrings() {
 
-        File cat = new File(Utilities.getTomcatInstallDirectory());
-
         String javaExecutablePath = Utilities.getJavaExecutablePath();
         String java;
         if(javaExecutablePath != null) {
@@ -47,12 +45,19 @@ public class History {
             java = (new File(Utilities.getJavaHome(), "bin/java" + (Utils.isWindows() ? ".exe" : ""))).getAbsolutePath();
         }
 
+        // The log parser now runs out of the executable WAR (Spring Boot
+        // PropertiesLauncher), reusing the app's modern sqlite-jdbc, instead of the
+        // legacy standalone LogParser.jar under <tomcat>/bin. java.class.path is the
+        // launched WAR; catalina.base is the dir whose db/ holds the SQLite files.
+        String war = System.getProperty("java.class.path");
+        String base = System.getProperty("catalina.base");
+
         ArrayList<String> includeStrings = new ArrayList<String>();
         includeStrings.add("#This section is written by the apache gui do not manually edit " + Constants.HISTORY_LOG_HOLDER);
         includeStrings.add("LogFormat \"%h\\\",\\\"%{User-agent}i\\\",\\\"%r\\\",\\\"%>s\\\",\\\"%B\" " + Constants.HISTORY_LOG_HOLDER);
 
-        includeStrings.add("CustomLog \"|\\\"" + java + "\\\" -jar \\\"" + (new File(cat, "bin/LogParser.jar")).getAbsolutePath() + "\\\" \\\""
-                + cat.getAbsolutePath() + "\\\"\" " + Constants.HISTORY_LOG_HOLDER);
+        includeStrings.add("CustomLog \"|\\\"" + java + "\\\" -Dloader.main=net.apachegui.history.LogIngest -Dloader.path=WEB-INF/classes,WEB-INF/lib -cp \\\""
+                + war + "\\\" org.springframework.boot.loader.launch.PropertiesLauncher \\\"" + base + "\\\"\" " + Constants.HISTORY_LOG_HOLDER);
 
         return includeStrings.toArray(new String[includeStrings.size()]);
     }

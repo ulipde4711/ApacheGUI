@@ -281,7 +281,11 @@ public class GUIViewController {
     @RequestMapping(value = "/jsp/History.jsp")
     public String renderHistoryViewJsp(Model model) {
 
-        model.addAttribute("databaseFile", (new File(Utilities.getTomcatInstallDirectory(), "db/apachegui-history-database.db")).getAbsolutePath());
+        // The history DB lives next to the other SQLite DBs under the Tomcat base
+        // dir, which Spring Boot's embedded Tomcat exposes via catalina.base. (The
+        // legacy Utilities.getTomcatInstallDirectory() walked up to a folder named
+        // "tomcat" that doesn't exist in the embedded/Docker layout, throwing NPE.)
+        model.addAttribute("databaseFile", (new File(System.getProperty("catalina.base"), "db/apachegui-history-database.db")).getAbsolutePath());
 
         return "views/History";
     }
